@@ -8,13 +8,13 @@ package javaapplication3;
  *
  * @author jhon
  */
-public class JavaApplication3 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class Tetris {
+    public static void main (String[]args){
+      Figura figura1=new FiguraCuadrado(0,0);
+      Figura figura2=new FiguraL(0,0);
+      int[][]forma1=figura1.darForma();
+      int[][] forma2=figura2.darForma();
+       System.out.println(forma1);
     }
     
 }
