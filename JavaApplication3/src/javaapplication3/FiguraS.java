@@ -4,10 +4,16 @@
  */
 package javaapplication3;
 
-/**
- *
- * @author jhon
- */
-public class FiguraS {
-    
+public class FiguraS extends Figura {
+    public FiguraS(int fila, int columna){
+        super (fila,columna);
+    }
+    @Override
+    public int [][]darForma(){
+    return new int[][]{
+        {0,1,1},
+        {0,1,0},
+        {1,1,0}
+    };
+    }
 }

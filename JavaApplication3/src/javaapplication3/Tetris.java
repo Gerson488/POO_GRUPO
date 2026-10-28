@@ -14,7 +14,7 @@ public class Tetris {
       Figura figura2=new FiguraL(0,0);
       int[][]forma1=figura1.darForma();
       int[][] forma2=figura2.darForma();
-       System.out.println(forma1);
+     
     }
     
 }

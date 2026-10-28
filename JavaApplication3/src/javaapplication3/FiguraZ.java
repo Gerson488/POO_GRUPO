@@ -8,6 +8,16 @@ package javaapplication3;
  *
  * @author jhon
  */
-public class FiguraZ {
-    
+public class FiguraZ extends Figura {
+        public FiguraZ(int fila, int columna){
+        super (fila,columna);
+    }
+    @Override
+    public int [][]darForma(){
+    return new int[][]{
+        {1,1,1},
+        {0,1,0},
+        {1,1,1}
+    };
+    }   
 }
