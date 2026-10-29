@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package javaapplication3;
-
-/**
- *
- * @author jhon
- */
 public class FiguraLinea extends Figura {
         public FiguraLinea(int fila, int columna){
         super (fila,columna);

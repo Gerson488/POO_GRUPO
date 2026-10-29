@@ -4,10 +4,17 @@
  */
 package javaapplication3;
 
-/**
- *
- * @author jhon
- */
 public class Tablero {
-    
+    private int[][]celdas;
+    public Tablero(){
+        celdas=new int[20][20];
+    }
+    public void mostrarTablero(){
+        for(int fila=0;fila<celdas.length;fila++){
+            for(int columna=0;columna<celdas[fila].length; columna++){
+                System.out.print(".");
+            }
+            System.out.println();
+        }
+    }
 }

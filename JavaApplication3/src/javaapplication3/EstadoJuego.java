@@ -4,10 +4,6 @@
  */
 package javaapplication3;
 
-/**
- *
- * @author jhon
- */
 public class EstadoJuego {
     
 }

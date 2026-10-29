@@ -10,10 +10,8 @@ package javaapplication3;
  */
 public class Tetris {
     public static void main (String[]args){
-      Figura figura1=new FiguraCuadrado(0,0);
-      Figura figura2=new FiguraL(0,0);
-      int[][]forma1=figura1.darForma();
-      int[][] forma2=figura2.darForma();
+   Tablero tablero =new Tablero();
+   tablero.mostrarTablero();
      
     }
     

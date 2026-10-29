@@ -4,10 +4,6 @@
  */
 package javaapplication3;
 
-/**
- *
- * @author jhon
- */
 public class FiguraZ extends Figura {
         public FiguraZ(int fila, int columna){
         super (fila,columna);
