@@ -1,6 +1,15 @@
-/JavaApplication3/nbproject/private/
-/JavaApplication3/build/
-/pracicando/nbproject/private/
-/pracicando/build/
-/Practica/nbproject/private/
-/Practica/build/
+# Carpetas de prácticas a ignorar permanentemente
+Practica/
+pracicando/
+JavaApplication3/
+practicaPC2/
+Practicarefecion/
+Practicas/
+PracticaSet/
+
+# Archivos temporales y de configuración local de NetBeans / IDEs
+build/
+dist/
+nbproject/private/
+.nb-attrs
+*.class
