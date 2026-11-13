@@ -13,3 +13,4 @@ dist/
 nbproject/private/
 .nb-attrs
 *.class
+/practica/nbproject/private/
