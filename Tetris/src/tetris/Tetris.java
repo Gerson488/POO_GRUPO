@@ -4,16 +4,18 @@
  */
 package tetris;
 
+import javax.swing.JFrame;
+
 public class Tetris {
     public static void main(String[] args) {
-        MotorJuego motor = new MotorJuego(new FiguraL(0,5));
-        motor.aplicar(Accion.IZQUIERDA);
-        motor.aplicar(Accion.ABAJO);
-        motor.aplicar(Accion.ROTAR);
-        System.out.println(motor.getFigura().celdasEnTablero());
-
-        MotorJuego motor2 = new MotorJuego(new FiguraCuadrado(0, 0));
-        motor2.aplicar(Accion.ROTAR);
-        System.out.println(motor2.getFigura().celdasEnTablero());
+        JFrame marco = new JFrame("Tetris");
+        VentanaTetris panel = new VentanaTetris();
+        marco.add(panel);
+        marco.pack();
+        marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        marco.setLocationRelativeTo(null);
+        marco.setVisible(true);
+        panel.requestFocusInWindow();
+        
     }
 }

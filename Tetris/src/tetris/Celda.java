@@ -13,15 +13,24 @@ public class Celda {
         this.columna = columna;
     }
 
-    public int fila()    { return fila; }
-    public int columna() { return columna; }
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Celda)) return false;
-        Celda otra = (Celda) o;
-        return fila == otra.fila && columna == otra.columna;
+    public boolean equals(Object otra) {
+        if (this == otra) {
+            return true;
+        }
+        if (otra == null || getClass() != otra.getClass()) {
+            return false;
+        }
+        Celda c = (Celda) otra;
+        return fila == c.fila && columna == c.columna;
     }
 
     @Override
@@ -31,6 +40,6 @@ public class Celda {
 
     @Override
     public String toString() {
-        return "Celda[fila=" + fila + ", columna=" + columna + "]";
+        return "(" + fila + "," + columna + ")";
     }
 }

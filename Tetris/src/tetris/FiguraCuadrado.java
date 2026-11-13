@@ -4,21 +4,30 @@
  */
 package tetris;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class FiguraCuadrado extends Figura {
+
     public FiguraCuadrado(int fila, int columna) {
-        super(fila, columna);
+        super(fila, columna, "AMARILLO");
     }
 
+    // + X     <- fila 0
+    // X X     <- fila 1
     @Override
     public List<Celda> obtenerForma() {
-        return List.of(new Celda(0, 0), new Celda(0, 1), new Celda(1, 0), new Celda(1, 1));
+        return Arrays.asList(new Celda(0, 0), new Celda(0, 1),
+                             new Celda(1, 0), new Celda(1, 1));
     }
 
     @Override
-    public void rotar() { }           // el cuadrado no cambia al girar
+    public void rotar() {
+        // el cuadrado se ve igual al girar: no hace nada
+    }
 
     @Override
-    public void rotarInversa() { }
+    public void rotarInversa() {
+        // igual que arriba
+    }
 }

@@ -6,8 +6,8 @@ package tetris;
 
 public class Accion {
     public static final int IZQUIERDA = 0;
-    public static final int DERECHA   = 1;
-    public static final int ABAJO     = 2;
-    public static final int ROTAR     = 3;
-    public static final int NINGUNA   = 4;
+    public static final int DERECHA = 1;
+    public static final int ABAJO = 2;
+    public static final int ROTAR = 3;
+    public static final int NINGUNA = 4;
 }

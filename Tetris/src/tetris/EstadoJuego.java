@@ -4,10 +4,6 @@
  */
 package tetris;
 
-/**
- *
- * @author jhon
- */
 public class EstadoJuego {
     
 }

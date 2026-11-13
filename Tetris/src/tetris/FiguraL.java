@@ -4,15 +4,20 @@
  */
 package tetris;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class FiguraL extends Figura {
+
     public FiguraL(int fila, int columna) {
-        super(fila, columna);
+        super(fila, columna, "NARANJA");
     }
 
+    //     X       <- fila -1
+    // X + X       <- fila 0
     @Override
     public List<Celda> obtenerForma() {
-        return List.of(new Celda(0, -1), new Celda(0, 0), new Celda(0, 1), new Celda(0, 2));
+        return Arrays.asList(new Celda(-1, 1), new Celda(0, -1),
+                             new Celda(0, 0), new Celda(0, 1));
     }
 }

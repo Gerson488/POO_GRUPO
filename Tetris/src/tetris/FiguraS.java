@@ -4,10 +4,20 @@
  */
 package tetris;
 
-/**
- *
- * @author jhon
- */
-public class FiguraS{
-    
+import java.util.Arrays;
+import java.util.List;
+
+public class FiguraS extends Figura {
+
+    public FiguraS(int fila, int columna) {
+        super(fila, columna, "VERDE");
+    }
+
+    //   X X       <- fila -1
+    // X +         <- fila 0
+    @Override
+    public List<Celda> obtenerForma() {
+        return Arrays.asList(new Celda(0, -1), new Celda(0, 0),
+                             new Celda(-1, 0), new Celda(-1, 1));
+    }
 }
