@@ -1,31 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tetris;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import java.util.Random;
 import javax.swing.JPanel;
 
 public class VentanaTetris extends JPanel {
     private static final int TAM = 30;
-
-    private Tablero tablero = new Tablero();
-    private Figura figura;
-    private Random random = new Random();
+    private MotorDeJuego motor;
 
     public VentanaTetris() {
+        this.motor = new MotorDeJuego(new GeneradorBolsa());
         setPreferredSize(new Dimension(Tablero.COLUMNAS * TAM, Tablero.FILAS * TAM));
         setFocusable(true);
-        figura = nuevaFigura();
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -37,60 +30,30 @@ public class VentanaTetris extends JPanel {
         new javax.swing.Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bajar();
+                motor.avanzarTick();
+                repaint();
             }
         }).start();
     }
 
-    private Figura nuevaFigura() {
-        switch (random.nextInt(7)) {
-            case 0: return new FiguraLinea(1, 5);
-            case 1: return new FiguraCuadrado(1, 5);
-            case 2: return new FiguraT(1, 5);
-            case 3: return new FiguraS(1, 5);
-            case 4: return new FiguraZ(1, 5);
-            case 5: return new FiguraJ(1, 5);
-            default: return new FiguraL(1, 5);
-        }
-    }
-
- private void bajar() {
-    figura.moverAbajo();
-    if (!tablero.figuraCabe(figura)) {
-        figura.moverArriba();
-        tablero.fijarFigura(figura);
-        tablero.eliminarLineasCompletas();   // <- LINEA NUEVA
-        figura = nuevaFigura();
-        if (!tablero.figuraCabe(figura)) {
-            tablero = new Tablero();   // provisional
-        }
-    }
-    repaint();
-}
-    
-
     private void teclaPresionada(int tecla) {
+        if (motor.getEstado().isTerminado() && tecla == KeyEvent.VK_R) {
+            motor.reiniciar();
+            repaint();
+            return;
+        }
         switch (tecla) {
             case KeyEvent.VK_LEFT:
-                figura.moverIzquierda();
-                if (!tablero.figuraCabe(figura)) {
-                    figura.moverDerecha();
-                }
+                motor.procesarAccion(Accion.IZQUIERDA);
                 break;
             case KeyEvent.VK_RIGHT:
-                figura.moverDerecha();
-                if (!tablero.figuraCabe(figura)) {
-                    figura.moverIzquierda();
-                }
+                motor.procesarAccion(Accion.DERECHA);
                 break;
             case KeyEvent.VK_UP:
-                figura.rotar();
-                if (!tablero.figuraCabe(figura)) {
-                    figura.rotarInversa();
-                }
+                motor.procesarAccion(Accion.ROTAR);
                 break;
             case KeyEvent.VK_DOWN:
-                bajar();
+                motor.procesarAccion(Accion.ABAJO);
                 break;
             default:
                 break;
@@ -116,6 +79,7 @@ public class VentanaTetris extends JPanel {
         super.paintComponent(g);
         setBackground(Color.BLACK);
 
+        Tablero tablero = motor.getTablero();
         g.setColor(Color.GRAY);
         for (int fila = 0; fila < Tablero.FILAS; fila++) {
             for (int columna = 0; columna < Tablero.COLUMNAS; columna++) {
@@ -125,11 +89,25 @@ public class VentanaTetris extends JPanel {
             }
         }
 
-        g.setColor(traducirColor(figura.getColor()));
-        List<Celda> celdasFigura = figura.celdasEnTablero();
-        for (int i = 0; i < celdasFigura.size(); i++) {
-            Celda c = celdasFigura.get(i);
-            g.fillRect(c.getColumna() * TAM, c.getFila() * TAM, TAM - 1, TAM - 1);
+        Figura figura = motor.getFiguraActual();
+        if (figura != null) {
+            g.setColor(traducirColor(figura.getColor()));
+            List<Celda> celdasFigura = figura.celdasEnTablero();
+            for (int i = 0; i < celdasFigura.size(); i++) {
+                Celda c = celdasFigura.get(i);
+                g.fillRect(c.getColumna() * TAM, c.getFila() * TAM, TAM - 1, TAM - 1);
+            }
+        }
+
+        EstadoJuego estado = motor.getEstado();
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 14));
+        g.drawString("Puntos: " + estado.getPuntos() + "  Lineas: " + estado.getLineas() + "  Nivel: " + estado.getNivel(), 10, 20);
+
+        if (estado.isTerminado()) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
+            g.drawString("GAME OVER (R: Reiniciar)", 15, (Tablero.FILAS * TAM) / 2);
         }
     }
 }
